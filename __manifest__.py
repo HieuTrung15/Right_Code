@@ -14,7 +14,7 @@
         "views/account_move_views.xml",
         "views/sale_commission_settlement_view.xml",
         "wizard/wizard_settle.xml",
-        # "wizard/wizard_invoice.xml",
+        "wizard/wizard_invoice.xml",
     ],
     "demo": [],
     "installable": True,

@@ -26,16 +26,10 @@ class SaleCommissionMixin(models.Model):
     @api.depends("commission_free", "agent_ids")
     def _compute_commission_status(self):
         for line in self:
-            if line.commission_free:
-                line.commission_status = _("Comm. free")
-            elif len(line.agent_ids) == 0:
+            if len(line.agent_ids) == 0:
                 line.commission_status = _("No commission agents")
-            elif len(line.agent_ids) == 1:
-                line.commission_status = _("1 commission agent")
             else:
-                line.commission_status = _("%s commission agents") % (
-                    len(line.agent_ids),
-                )
+                line.commission_status = _("%s commission agents") % (len(line.agent_ids))
 
     def recompute_agents(self):
         self._compute_agent_ids()

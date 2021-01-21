@@ -10,17 +10,15 @@ class ResPartner(models.Model):
     agent = fields.Boolean(string="Creditor/Agent",)
     agent_type = fields.Selection(selection=[("agent", "External agent")], string="Type", default="agent")
     commission_id = fields.Many2one("sale.commission", string="Commission")
-    settlement = fields.Selection(
-        selection=[
+    settlement = fields.Selection([
             ("monthly", "Monthly"),
             ("quaterly", "Quarterly"),
             ("semi", "Semi-annual"),
             ("annual", "Annual"),
         ],
         string="Settlement period",
-        default="monthly",
-    )
-    settlement_ids = fields.One2many("sale.commission.settlement", inverse_name="agent_id")
+        default="monthly")
+    settlement_ids = fields.One2many("sale.commission.settlement", "agent_id")
 
     @api.model
     def _commercial_fields(self):
