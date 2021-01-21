@@ -6,47 +6,24 @@
         <field name="arch" type="xml">
             <form string="Settle commissions">
                 <group>
-                    <p
-                        colspan="4"
-                    >Select the date up to which you want to make the settlements:</p>
+                    <p colspan="4">Select the date you want to make settlement:</p>
                 </group>
                 <group colspan="2">
                     <field name="date_to" />
                 </group>
                 <group string="Agents" colspan="4">
-                    <p
-                        colspan="4"
-                    >(keep empty for making the settlement of all agents)</p>
+<!--                    <p colspan="4">(keep empty for making the settlement of all agents)</p>-->
                     <field name="agent_ids" nolabel="1" widget="many2many_list" />
                 </group>
                 <footer>
-                    <button
-                        name="action_settle"
-                        string="Make settlements"
-                        type="object"
-                        class="oe_highlight"
-                    />
+                    <button name="action_settle" string="Make settlements" type="object" class="oe_highlight"/>
                     or
-                    <button
-                        name="action_cancel"
-                        string="Cancel"
-                        class="oe_link"
-                        special="cancel"
-                    />
+                    <button name="action_cancel" string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
-    <act_window
-        id="action_agents_settlement"
-        name="Settle commissions"
-        res_model="sale.commission.make.settle"
-        view_mode="form"
-        target="new"
-    />
-    <menuitem
-        id="menu_agents_settlement"
-        parent="menu_sale_commissions_management"
-        action="action_agents_settlement"
-    />
+    <act_window id="action_agents_settlement" name="Settle commissions"
+        res_model="sale.commission.make.settle" view_mode="form" target="new"/>
+    <menuitem id="menu_agents_settlement" parent="menu_sale_commissions_management" action="action_agents_settlement"/>
 </odoo>

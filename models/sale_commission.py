@@ -11,7 +11,7 @@ class SaleCommission(models.Model):
         string="Type", required=True, default="fixed")
     fix_qty = fields.Float(string="Fixed percentage")
     section_ids = fields.One2many("sale.commission.section", "commission_id", string="Sections")
-    active = fields.Boolean(default=True)
+    # active = fields.Boolean(default=True)
     invoice_state = fields.Selection([
         ("open", "Invoice Based"),
         ("paid", "Payment Based")],
@@ -35,7 +35,6 @@ class SaleCommission(models.Model):
 
 class SaleCommissionSection(models.Model):
     _name = "sale.commission.section"
-    _description = "Commission section"
 
     commission_id = fields.Many2one("sale.commission", string="Commission")
     amount_from = fields.Float(string="From")

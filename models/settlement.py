@@ -1,6 +1,6 @@
 from odoo import _, api, exceptions, fields, models
-from odoo.exceptions import UserError
-from odoo.tests.common import Form
+# from odoo.exceptions import UserError
+# from odoo.tests.common import Form
 
 
 class Settlement(models.Model):
@@ -17,8 +17,7 @@ class Settlement(models.Model):
     agent_type = fields.Selection(related="agent_id.agent_type")
     line_ids = fields.One2many("sale.commission.settlement.line", "settlement_id",
                                string="Settlement lines")
-    state = fields.Selection(
-        selection=[
+    state = fields.Selection([
             ("settled", "Settled"),
             ("invoiced", "Invoiced"),
             ("cancel", "Canceled"),

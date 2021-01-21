@@ -11,9 +11,9 @@ class SaleOrder(models.Model):
 
     commission_total = fields.Float(string="Commissions", compute="_compute_commission_total", store=True)
 
-    def recompute_lines_agents(self):
-        self.mapped("order_line").recompute_agents()
-
+    # def recompute_lines_agents(self):
+    #     self.mapped("order_line").recompute_agents()
+    #
 
 class SaleOrderLine(models.Model):
     _inherit = [
@@ -24,22 +24,22 @@ class SaleOrderLine(models.Model):
 
     agent_ids = fields.One2many(comodel_name="sale.order.line.agent")
 
-    @api.depends("order_id.partner_id")
-    def _compute_agent_ids(self):
-        self.agent_ids = False  # for resetting previous agents
-        for record in self.filtered(lambda x: x.order_id.partner_id):
-            if not record.commission_free:
-                record.agent_ids = record._prepare_agents_vals_partner(
-                    record.order_id.partner_id
-                )
+    # @api.depends("order_id.partner_id")
+    # def _compute_agent_ids(self):
+    #     self.agent_ids = False  # for resetting previous agents
+    #     for record in self.filtered(lambda x: x.order_id.partner_id):
+    #         if not record.commission_free:
+    #             record.agent_ids = record._prepare_agents_vals_partner(
+    #                 record.order_id.partner_id
+    #             )
 
-    def _prepare_invoice_line(self):
-        vals = super()._prepare_invoice_line()
-        vals["agent_ids"] = [
-            (0, 0, {"agent_id": x.agent_id.id, "commission_id": x.commission_id.id})
-            for x in self.agent_ids
-        ]
-        return vals
+    # def _prepare_invoice_line(self):
+    #     vals = super()._prepare_invoice_line()
+    #     vals["agent_ids"] = [
+    #         (0, 0, {"agent_id": x.agent_id.id, "commission_id": x.commission_id.id})
+    #         for x in self.agent_ids
+    #     ]
+    #     return vals
 
 
 class SaleOrderLineAgent(models.Model):
@@ -47,7 +47,7 @@ class SaleOrderLineAgent(models.Model):
     _name = "sale.order.line.agent"
     _description = "Agent detail of commission line in order lines"
 
-    object_id = fields.Many2one(comodel_name="sale.order.line")
+    object_id = fields.Many2one("sale.order.line")
     currency_id = fields.Many2one(related="object_id.currency_id")
 
     @api.depends("object_id.price_subtotal", "object_id.product_id", "object_id.product_uom_qty")

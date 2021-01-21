@@ -19,7 +19,7 @@
                 <group string="General information">
                     <group>
                         <field name="name" />
-                        <field name="active" />
+<!--                        <field name="active" />-->
                     </group>
                     <group>
                         <field name="commission_type" />
@@ -62,7 +62,6 @@
         id="menu_sale_commissions_management"
         parent="sale.sale_menu_root"
         groups="sales_team.group_sale_manager"
-        sequence="4"
     />
     <menuitem
         name="Commission types"

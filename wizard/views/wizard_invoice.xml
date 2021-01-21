@@ -11,10 +11,7 @@
                     <field name="product_id" />
                     <field name="date" />
                 </group>
-                <group
-                    string="Settlements"
-                    attrs="{'invisible': [('from_settlement', '=', True)]}"
-                >
+                <group string="Settlements" attrs="{'invisible': [('from_settlement', '=', True)]}">
                     <p colspan="4">(keep empty for invoicing all the settlements)</p>
                     <field name="from_settlement" invisible="1" />
                     <group colspan="4">
@@ -22,11 +19,7 @@
                     </group>
                 </group>
                 <footer>
-                    <button
-                        name="button_create"
-                        string="Create invoices"
-                        type="object"
-                        class="oe_highlight"
+                    <button name="button_create" string="Create invoices" type="object" class="oe_highlight"
                     />
                     or
                     <button special="cancel" string="_Cancel" class="oe_link" />
@@ -34,17 +27,7 @@
             </form>
         </field>
     </record>
-    <act_window
-        id="action_commission_make_invoices"
-        name="Create commission invoices"
-        res_model="sale.commission.make.invoice"
-        view_mode="form"
-        target="new"
-    />
-    <menuitem
-        id="menu_commission_make_invoices"
-        parent="menu_sale_commissions_management"
-        sequence="30"
-        action="action_commission_make_invoices"
-    />
+    <act_window id="action_commission_make_invoices" name="Create commission invoices" res_model="sale.commission.make.invoice"
+        view_mode="form" target="new"/>
+    <menuitem id="menu_commission_make_invoices" parent="menu_sale_commissions_management" action="action_commission_make_invoices"/>
 </odoo>

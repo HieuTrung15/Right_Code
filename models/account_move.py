@@ -27,16 +27,16 @@ class AccountMoveLine(models.Model):
         for record in self:
             record.any_settled = any(record.mapped("agent_ids.settled"))
 
-    @api.depends("move_id.partner_id")
-    def _compute_agent_ids(self):
-        self.agent_ids = False  # for resetting previous agents
-        for record in self.filtered(
-                lambda x: x.move_id.partner_id and x.move_id.type[:3] == "out"
-        ):
-            if not record.commission_free and record.product_id:
-                record.agent_ids = record._prepare_agents_vals_partner(
-                    record.move_id.partner_id
-                )
+    # @api.depends("move_id.partner_id")
+    # def _compute_agent_ids(self):
+    #     self.agent_ids = False  # for resetting previous agents
+    #     for record in self.filtered(
+    #             lambda x: x.move_id.partner_id and x.move_id.type[:3] == "out"
+    #     ):
+    #         if not record.commission_free and record.product_id:
+    #             record.agent_ids = record._prepare_agents_vals_partner(
+    #                 record.move_id.partner_id
+    #             )
 
 
 class AccountInvoiceLineAgent(models.Model):
@@ -62,9 +62,9 @@ class AccountInvoiceLineAgent(models.Model):
                 inv_line.product_id,
                 inv_line.quantity,
             )
-            # Refunds commissions are negative
-            if line.invoice_id.type and "refund" in line.invoice_id.type:
-                line.amount = -line.amount
+            # # Refunds commissions are negative
+            # if line.invoice_id.type and "refund" in line.invoice_id.type:
+            #     line.amount = -line.amount
 
     @api.depends("agent_line", "agent_line.settlement_id.state", "invoice_id", "invoice_id.state")
     def _compute_settled(self):
@@ -92,7 +92,4 @@ class AccountInvoiceLineAgent(models.Model):
         :return: bool
         """
         self.ensure_one()
-        return (
-                       self.commission_id.invoice_state == "paid"
-                       and self.invoice_id.invoice_payment_state != "paid"
-               ) or self.invoice_id.state != "posted"
+        return (self.commission_id.invoice_state == "paid"and self.invoice_id.invoice_payment_state != "paid") or self.invoice_id.state != "posted"

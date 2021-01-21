@@ -1,9 +1,9 @@
 {
     "name": "Sales commissions",
-    "version": "13.0.1.3.0",
+    "version": "1.0",
     "category": "Sales Management",
     "depends": ["account", "product", "sale_management"],
-    "website": "https://github.com/OCA/commission",
+    "website": "https://github.com/HieuTrung15/Right_Code",
     "data": [
         "security/ir.model.access.csv",
         "views/sale_commission_view.xml",
@@ -14,7 +14,7 @@
         "views/account_move_views.xml",
         "views/sale_commission_settlement_view.xml",
         "wizard/views/wizard_settle.xml",
-        "wizard/views/wizard_invoice.xml",
+        # "wizard/views/wizard_invoice.xml",
     ],
     "demo": [],
     "installable": True,

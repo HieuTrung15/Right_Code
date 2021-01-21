@@ -111,7 +111,6 @@ class SaleCommissionMakeSettle(models.TransientModel):
                             "agent_line": [(6, 0, [line.id])],
                         }
                     )
-        # go to results
         if len(settlement_ids):
             return {
                 "name": _("Created Settlements"),
