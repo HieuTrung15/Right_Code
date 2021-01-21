@@ -42,7 +42,6 @@ class AccountMoveLine(models.Model):
 class AccountInvoiceLineAgent(models.Model):
     _inherit = "sale.commission.line.mixin"
     _name = "account.invoice.line.agent"
-    _description = "Agent detail of commission line in invoice lines"
 
     object_id = fields.Many2one("account.move.line")
     invoice_id = fields.Many2one("account.move", string="Invoice", related="object_id.move_id", )
